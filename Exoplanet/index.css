@@ -4,7 +4,9 @@ body{
 
 .websiteBody{
   margin: auto;
-}.Page{
+}
+
+.Page{
   display:block;
   margin:auto;
   width:100%;
@@ -280,7 +282,6 @@ body{
   margin-top:-837px;
   margin-bottom:571.63px;
   min-height:265.37px;
-  content:url(assets/images/Target_Pixel_Files_54_0_1.png);
 }
 .Target-Pixel-Files-5-outer{
   position:relative;
