@@ -339,17 +339,50 @@ function testResponse(){
 			"RNN" : {"Probability":50, "classification": "Yes"},
 			"LSTM" : {"Probability":69, "classification": "Yes"},
 			"GRU" : {"Probability":70, "classification": "Yes"},
-		"LR" : {"Probability":70, "classification": "Yes"},
-		"RF" : {}
+			"LR" : {"Probability":70, "classification": "Yes"},
+			"RF" : {}
 		}
     }
 	
-	//console.log(testResponse.targetpixelfile);
+	console.log(testResponse.results.GRU.classification);
 	
-	document.getElementById('Target-Pixel-Files-5').src = "data:image/png;base64," + testResponse.targetpixelfile;
+	pixelFile = document.getElementById('Target-Pixel-Files-5');
+	pixelFile.src = "data:image/png;base64," + testResponse.targetpixelfile;
+	
+	rnnProb = document.getElementById("theResults-RNN-Probability");
+	rnnClassfic = document.getElementById("theResults-RNN-Classification");
+	rnnProb.innerHTML = "Probability: " + testResponse.results.RNN.Probability;
+	rnnClassfic.innerHTML = "Classification: " + testResponse.results.RNN.classification;
+	
+	lstmProb = document.getElementById("theResults-LSTM-Probability");
+	lstmClassfic = document.getElementById("theResults-LSTM-Classification");
+	lstmProb.innerHTML = "Probability: " + testResponse.results.LSTM.Probability;
+	lstmClassfic.innerHTML = "Classification: " + testResponse.results.LSTM.classification;
+	
+	gruProb = document.getElementById("theResults-GRU-Probability");
+	gruClassfic = document.getElementById("theResults-GRU-Classification");
+	gruProb.innerHTML = "Probability: " + testResponse.results.GRU.Probability;
+	gruClassfic.innerHTML = "Classification: " + testResponse.results.GRU.classification;
+	
+	lrProb = document.getElementById("theResults-LR-Probability");
+	lrClassfic = document.getElementById("theResults-LR-Classification");
+	lrProb.innerHTML = "Probability: " + testResponse.results.LR.Probability;
+	lrClassfic.innerHTML = "Classification: " + testResponse.results.LR.classification;
+	
+	rfProb = document.getElementById("theResults-RF-Probability");
+	rfClassfic = document.getElementById("theResults-RF-Classification");
+	rfProb.innerHTML = "Probability: " + testResponse.results.RF.Probability;
+	rfClassfic.innerHTML = "Classification: " + testResponse.results.RF.classification;
+	
+	
+	console.log(testResponse.results.GRU.Classification);
+	
+	
+	//document.getElementById('Target-LightCurve-Files').src = "data:image/png;base64," + testResponse.lightcurve;
 }
 
-// testing to see if I am stupid or if the url does not work
+// testing to see if I am stupid or if the uri does not work
+// problem has been fixed so can ignore or delete later
 function dummyResponse(){
 	var dummyResponse = {
 		id: 22,

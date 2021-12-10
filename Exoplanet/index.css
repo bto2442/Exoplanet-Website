@@ -7,12 +7,10 @@ body{
 }
 
 .Page{
-  display:block;
-  margin:auto;
-  width:100%;
-  height:auto;
 }
 .Page-outer{
+	width: 100%;
+	border: white;
 }
 .Frame{
   position:relative;
@@ -30,7 +28,7 @@ body{
 .Top-Nav-Bar{
   position:relative;
   margin-left:0px;
-  width:1406px;
+  width:100%;
   min-width:1406px;
   height:75px;
   margin-top:0px;
@@ -40,6 +38,7 @@ body{
 .Top-Nav-Bar-outer{
   position:relative;
   display:flex;
+  
 }
 .Exoplanet-Detection-{
   position:relative;
@@ -333,8 +332,8 @@ body{
   font-style:normal;
   font-family:Arimo;
   font-weight:400;
-  font-size:30px;
-  line-height:35px;
+  font-size:20px;
+  line-height:22px;
 }
 .Results--RNN--Probab-outer{
   position:relative;
