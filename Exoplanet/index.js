@@ -26,6 +26,26 @@ function fillDropDown()
 	});
 }*/
 
+function filterSearch() {
+	// Declare variables
+	var input, filter, ul, li, a, i, txtValue;
+	input = document.getElementById('Input-Box-1');
+	filter = input.value.toUpperCase();
+	datalist = document.getElementById("planets");
+	options = datalist.getElementsByTagName('option');
+  
+	// Loop through all list items, and hide those who don't match the search query
+	for (i = 0; i < options.length; i++) {
+	  a = options[i].getElementsByTagName("a")[0];
+	  txtValue = a.textContent || a.innerText;
+	  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		options[i].style.display = "";
+	  } else {
+		loptionsi[i].style.display = "none";
+	  }
+	}
+  }
+
 function changeEclipse(id)
 {	
 	//turn on
