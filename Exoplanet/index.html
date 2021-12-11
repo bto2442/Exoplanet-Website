@@ -84,14 +84,25 @@
 											</div>
 										</div>
 										<div class="Input-Box-1-outer">
-											<input 
-												type = "text"
+											<input
 												id="Input-Box-1"
 												data-name="Input Box"
 												alt="Input Box"
 												class="Input-Box-1"
-												>
+												list="planets"
+												
+												>		
 											</input>
+											<datalist id="planets" onload = "fillDropDown()"></datalist>
+											<script>
+												dropDown = getDropDownArr();
+												dropDownEle = document.getElementById("planets");
+												dropDown.forEach(element => {
+													optionEle = document.createElement("option");
+													optionEle.text = element;
+													dropDownEle.appendChild(optionEle)
+												});
+											</script>
 										</div>
 									</div>
 								</div>
