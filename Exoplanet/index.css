@@ -267,7 +267,7 @@ body{
   font-family:Roboto;
   font-size: 16px;
   margin: 4px 2px;
-  width:20%;
+  width:50%;
   cursor: pointer;
 }
 
@@ -279,7 +279,7 @@ body{
 }
 
 .theResults{
-  display: inline;
+  display: inline-block;
 }
 
 .Calculate-outer{
@@ -368,7 +368,6 @@ body{
   margin-bottom:0px;
   min-height:389.3px;
   text-align:left;
-  display:flex;
   flex-direction:column;
   justify-content:flex-start;
   color:rgba(0, 0, 0, 1);
