@@ -1,98 +1,28 @@
 body{
 	background-color: #222222;
+	margin: auto;
 }
 
-.websiteBody{
-  margin: auto;
+.TopBar{
+	position:relative;
+	background:url(assets/images/Nav_Bar_Background.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	text-align: center;
 }
 
-.Page{
+.TopBar a{
+	font-family: Montserrat;
+	font-size: 4em;
+	color: #CAC7DD;
 }
-.Page-outer{
-	width: 100%;
-	border: white;
-}
-.Frame{
-  position:relative;
-  
-  width:100%;
-  margin-left:0;
-  height:100%;
-  
-  margin:auto;
-  background-color:#222222;
-  overflow:hidden;
-}
-.Frame-outer{
-}
-.Top-Nav-Bar{
-  position:relative;
-  margin-left:0px;
-  width:100%;
-  min-width:1406px;
-  height:75px;
-  margin-top:0px;
-  margin-bottom:949px;
-  min-height:75px;
-}
-.Top-Nav-Bar-outer{
-  position:relative;
-  display:flex;
-  
-}
-.Exoplanet-Detection-{
-  position:relative;
-  margin-left:0px;
-  width:1406px;
-  min-width:1406px;
-  margin-top:0px;
-  margin-bottom:0px;
-  min-height:75px;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  color:rgba(202, 199, 221, 1);
-  font-style:normal;
-  font-family:Montserrat;
-  font-weight:400;
-  font-size:64px;
-  line-height:78.75px;
-}
-.Exoplanet-Detection--outer{
-  position:relative;
-  display:flex;
-}
-.Nav-Bar-Background{
-  position:relative;
-  opacity:0.4000000059604645;
-  margin-left:0px;
-  width:1410px;
-  min-width:1410px;
-  height:83px;
-  margin-top:-75px;
-  margin-bottom:-8px;
-  min-height:83px;
-  content:url(assets/images/Nav_Bar_Background.png);
-}
-.Nav-Bar-Background-outer{
-  position:relative;
-  display:flex;
-}
+
 .Input{
   position:relative;
-  margin-left:-24px;
-  width:819px;
-  min-width:819px;
   height:85px;
-  margin-top:-906px;
-  margin-bottom:821px;
   min-height:85px;
 }
-.Input-outer{
-  position:relative;
-  display:flex;
-}
+
 .Input-Box{
   position:relative;
   margin-left:0px;
@@ -103,10 +33,7 @@ body{
   margin-bottom:0px;
   min-height:85px;
 }
-.Input-Box-outer{
-  position:relative;
-  
-}
+
 .Input-{
   position:relative;
   margin-left:0px;
@@ -123,10 +50,7 @@ body{
   font-size:64px;
   line-height:77.5px;
 }
-.Input--outer{
-  position:relative;
-  display:flex;
-}
+
 .Input--1{
   color:rgba(255, 255, 255, 1);
   font-style:normal;
@@ -135,37 +59,7 @@ body{
   font-size:64px;
   line-height:77.5px;
 }
-.Input--2{
-  color:rgba(115, 129, 255, 1);
-  font-style:normal;
-  font-family:Roboto;
-  font-weight:400;
-  font-size:64px;
-  line-height:77.5px;
-}
-.Lightcurve{
-  position:relative;
-  margin-left:240px;
-  width:292px;
-  min-width:292px;
-  margin-top:-78px;
-  margin-bottom:8px;
-  min-height:70px;
-  text-align:left;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  color:rgba(129, 125, 125, 1);
-  font-style:normal;
-  font-family:Roboto;
-  font-weight:400;
-  font-size:48px;
-  line-height:57.5px;
-}
-.Lightcurve-outer{
-  position:relative;
-  display:flex;
-}
+
 .Input-Box-1{
   position:relative;
   margin-left:226px;
@@ -200,10 +94,7 @@ body{
   box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
   /* Lowering the shadow */
 }
-.CalcButton-outer{
-  position:relative;
-  display:flex;
-}
+
 .Button{
   position:relative;
   margin-left:0px;
@@ -215,6 +106,7 @@ body{
   min-height:75px;
   content:url(assets/images/Button.png);
 }
+
 .Button-outer{
   position:relative;
   display:flex;
@@ -239,67 +131,21 @@ body{
   line-height:57.5px;
   pointer-events: none;
 }
-
-.pixelBtn{
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  text-decoration: none;
-  font-family:Roboto;
-  font-size: 16px;
-  margin: 4px 2px;
-  width:20%;
-  cursor: pointer;
-}
-
-.pixelBtn:active {
-  transform: scale(0.98);
-  /* Scaling button to 0.98 to its original size */
-  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-  /* Lowering the shadow */
-}
-
-.lightCurveBtn{
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  text-decoration: none;
-  font-family:Roboto;
-  font-size: 16px;
-  margin: 4px 2px;
-  width:20%;
-  cursor: pointer;
-}
-
-.lightCurveBtn:active {
-  transform: scale(0.98);
-  /* Scaling button to 0.98 to its original size */
-  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-  /* Lowering the shadow */
-}
-
-.theResults{
-  display: inline;
-}
-
 .Calculate-outer{
   position:relative;
   display:flex;
 }
+
 .Output{
   position:relative;
   margin-left:987px;
   width:432px;
   min-width:432px;
   height:863px;
-  margin-top:-899px;
   margin-bottom:36px;
   min-height:863px;
 }
-.Output-outer{
-  position:relative;
-  display:flex;
-}
+
 .OutputBackground{
   position:relative;
   margin-left:0px;
