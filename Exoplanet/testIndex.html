@@ -16,98 +16,81 @@
 		<link rel="stylesheet" href="testCSS.css">
 		<script src="index.js"></script>
 	</head>
-	<body>	
+	<body>
 		<div class="TopBar">
-			<a class ="title"> Exoplanet Detection Models </div>
+			<a class ="title"> Exoplanet Detection Models 
 		</div>
-		
-		<div class="Input">
-			<div class="Input-Box">
-				<div class="Input-">
-					<span class="Input--1">Input:</span>         
-				</div>		
-				<div class="Input-Box-1-outer">
-					<input class="Input-Box-1" type = "text">
-					</input>
-				</div>
-			</div>
-			
-			<div class="CalcButton" onclick = "httpRequest()">
-				<div class="Button-outer">
-					<img class="Button">
-				</div>
-				<div class="Calculate">
-					<div>Calculate</div>
+		<div id="Input" class="Input">
+			<div class="Input-Box-outer">
+				<div id="Input-Box" class="Input-Box">
+					<div class="Input--outer">
+						<div id="Input-" class="Input-">
+							<span class="Input--1">Input:</span>            
+						</div>
 					</div>
-			</div>
-			
-		</div>
-		<div class="Output-outer">
-			<div
-				id="Output"
-				data-name="Output"
-				class="Output"
-				>
-				<div class="OutputBackground-outer">
-					<img
-						id="OutputBackground"
-						data-name="OutputBackground"
-						alt="OutputBackground"
-						class="OutputBackground"
-						>
-				</div>
-				<div class="Target-Pixel-Files-5-outer">
-					<img
-						id="Target-Pixel-Files-5"
-						data-name="Target-Pixel-Files_54_0 1"
-						alt="Target-Pixel-Files_54_0 1"
-						class="Target-Pixel-Files-5"
-						src= "./assets/images/Target_Pixel_Files_54_0_1.png";
-						>
-				</div>
-				<div class="OutputBackground-1-outer">
-					<div
-						id="OutputBackground-1"
-						data-name="OutputBackground"
-						alt="OutputBackground"
-						class="OutputBackground-1"
-						>
+					<div class="Input-Box-1-outer">
+						<input id="Input-Box-1" class="Input-Box-1" list="planets" onkeyup="filterSearch"></input>
+						<datalist id="planets" onload = "fillDropDown()"></datalist>
+						<script>
+							dropDown = getDropDownArr();
+							dropDownEle = document.getElementById("planets");
+							dropDown.forEach(element => {
+								optionEle = document.createElement("option");
+								optionEle.text = element;
+								dropDownEle.appendChild(optionEle)
+							});
+						</script>
 					</div>
 				</div>
-				<div class="TextResults-outer">
-					<div
-						id="TextResults"
-						data-name="TextResults"
-						class="TextResults"
-						>
-						<div class="Results--RNN--Probab-outer">
-							<div
-								id="Results--RNN--Probab"
-								data-name="Results: RNN: Probability:Yes/No GRU: Probability:Yes/No LR: Probability:Yes/No"
-								class="Results--RNN--Probab"
-								>
-								<div id = "theResults">Results:</div>
-								<div id = "theResults-break">&nbsp;</div>
-								<div id = "theResults-RNN">RNN:</div>
-								<div id = "theResults-RNN-Probability">Probability:Yes/No</div>
-								<div id = "theResults-RNN-Classification">Classification:Yes/No</div>
-								<div id = "theResults-break">&nbsp;</div>
-								<div id = "theResults-LSTM">LSTM:</div>
-								<div id = "theResults-LSTM-Probability">Probability:Yes/No</div>
-								<div id = "theResults-LSTM-Classification">Classification:Yes/No</div>
-								<div id = "theResults-break">&nbsp;</div>
-								<div id = "theResults-GRU">GRU:</div>
-								<div id = "theResults-GRU-Probability">Probability:Yes/No</div>
-								<div id = "theResults-GRU-Classification">Classification:Yes/No</div>
-								<div id = "theResults-break">&nbsp;</div>
-								<div id = "theResults-LR">LR:</div>
-								<div id = "theResults-LR-Probability">Probability:Yes/No</div>
-								<div id = "theResults-LR-Classification">Classification:Yes/No</div>
-								<div id = "theResults-break">&nbsp;</div>
-								<div id = "theResults-RF">RF:</div>
-								<div id = "theResults-RF-Probability">Probability:Yes/No</div>
-								<div id = "theResults-RF-Classification">Classification:Yes/No</div>
-							</div>
+			</div>
+			<div class="CalcButton-outer">
+				<div id="CalcButton" class="CalcButton" onclick = "httpRequest()">
+					<div class="Button-outer">
+						<img id="Button" class="Button">
+					</div>
+					<div class="Calculate-outer">
+						<div id="Calculate" class="Calculate">
+							<div key="0">Calculate</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="Output" class="Output">
+			<img id="OutputBackground" class="OutputBackground">
+			<div class="Target-Pixel-Files-5-outer">
+				<img id="Target-Pixel-Files-5" class="Target-Pixel-Files-5" src= "./assets/images/transparent.png">
+			</div>
+			<div class="OutputBackground-1-outer">
+				<div id="OutputBackground-1" class="OutputBackground-1"></div>
+			</div>
+			<div class="TextResults-outer">
+				<div id="TextResults" class="TextResults">
+					<div class="Results--RNN--Probab-outer">
+						<div id="Results--RNN--Probab" class="Results--RNN--Probab">
+							<span id = "theResults">Results:</span>
+							<button class = "pixelBtn" onclick ="pixelImage()">Pixel</button>
+							<button class = "lightCurveBtn" onclick = "lightCurveImage()">Light Curve</button>
+							<div id = "theResults-RNN-break">&nbsp;</div>
+							<div id = "theResults-RNN">RNN:</div>
+							<div id = "theResults-RNN-Probability">Probability:Yes/No</div>
+							<div id = "theResults-RNN-Classification">Classification:Yes/No</div>
+							<div id = "theResults-LSTM-break">&nbsp;</div>
+							<div id = "theResults-LSTM">LSTM:</div>
+							<div id = "theResults-LSTM-Probability">Probability:Yes/No</div>
+							<div id = "theResults-LSTM-Classification">Classification:Yes/No</div>
+							<div id = "theResults-GRU-break">&nbsp;</div>
+							<div id = "theResults-GRU">GRU:</div>
+							<div id = "theResults-GRU-Probability">Probability:Yes/No</div>
+							<div id = "theResults-GRU-Classification">Classification:Yes/No</div>
+							<div id = "theResults-LR-break">&nbsp;</div>
+							<div id = "theResults-LR">LR:</div>
+							<div id = "theResults-LR-Probability">Probability:Yes/No</div>
+							<div id = "theResults-LR-Classification">Classification:Yes/No</div>
+							<div id = "theResults-RF-break">&nbsp;</div>
+							<div id = "theResults-RF">RF:</div>
+							<div id = "theResults-RF-Probability">Probability:Yes/No</div>
+							<div id = "theResults-RF-Classification">Classification:Yes/No</div>
 						</div>
 					</div>
 				</div>

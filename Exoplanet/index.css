@@ -1,91 +1,28 @@
 body{
 	background-color: #222222;
+	margin: 0;
 }
 
-.websiteBody{
-  margin: auto;
+.TopBar{
+	position:relative;
+	background:url(assets/images/Nav_Bar_Background.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	text-align: center;
 }
 
-.Page{
+.TopBar a{
+	font-family: Montserrat;
+	font-size: 4em;
+	color: #CAC7DD;
 }
-.Page-outer{
-	width: 100%;
-	border: white;
-}
-.Frame{
-  position:relative;
-  
-  width:100%;
-  margin-left:0;
-  height:100%;
-  
-  margin:auto;
-  background-color:#222222;
-  overflow:hidden;
-}
-.Frame-outer{
-}
-.Top-Nav-Bar{
-  position:relative;
-  margin-left:0px;
-  width:100%;
-  min-width:1406px;
-  height:75px;
-  margin-top:0px;
-  margin-bottom:949px;
-  min-height:75px;
-}
-.Top-Nav-Bar-outer{
-  position:relative;
-  display:flex;
-  
-}
-.Exoplanet-Detection-{
-  position:relative;
-  margin-left:0px;
-  width:1406px;
-  min-width:1406px;
-  margin-top:0px;
-  margin-bottom:0px;
-  min-height:75px;
-  text-align:center;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  color:rgba(202, 199, 221, 1);
-  font-style:normal;
-  font-family:Montserrat;
-  font-weight:400;
-  font-size:64px;
-  line-height:78.75px;
-}
-.Exoplanet-Detection--outer{
-  position:relative;
-  display:flex;
-}
-.Nav-Bar-Background{
-  position:relative;
-  opacity:0.4000000059604645;
-  margin-left:0px;
-  width:1410px;
-  min-width:1410px;
-  height:83px;
-  margin-top:-75px;
-  margin-bottom:-8px;
-  min-height:83px;
-  content:url(assets/images/Nav_Bar_Background.png);
-}
-.Nav-Bar-Background-outer{
-  position:relative;
-  display:flex;
-}
+
 .Input{
   position:relative;
   margin-left:-24px;
   width:819px;
   min-width:819px;
   height:85px;
-  margin-top:-906px;
   margin-bottom:821px;
   min-height:85px;
 }
