@@ -1,7 +1,7 @@
 # Exoplanet-Website
 
 # Description
-This is the website that works in tandemn with https://github.com/timzhen38/EDM_NEW to predict exoplanets given an input.
+This is the website that works in tandem with https://github.com/timzhen38/EDM_NEW to predict exoplanets given an input.
 
 # Steps
 1. Select a given input number to be calculated.
