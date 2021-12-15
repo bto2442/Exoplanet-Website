@@ -253,7 +253,7 @@ body{
   display:flex;
 }
 .Target-Pixel-Files-5{
-  position:relative;
+  position:absolute;
   margin-left:36px;
   width:360px;
   min-width:360px;
@@ -1272,7 +1272,6 @@ body{
 }
 .Select-a-model-s-{
   position:relative;
-  
   margin-left:0px;
   width:235px;
   min-width:235px;

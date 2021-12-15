@@ -105,7 +105,7 @@ function changeEclipse(id)
 
 function toggleTrainingData(id)
 {
-	//toggle keplar
+	//toggle kepler
 	
 	if(id == "Ellipse-1"){
 		if(document.getElementById("Ellipse-1-1").getAttribute('src') == "./assets/images/Ellipse_1.png")
@@ -116,7 +116,7 @@ function toggleTrainingData(id)
 		}
 	}
 	
-	//toggle keplar
+	//toggle kepler
 	if(id == "Ellipse-1-1"){
 		if(document.getElementById("Ellipse-1").getAttribute('src') == "./assets/images/Ellipse_1.png"){
 			document.getElementById("Ellipse-1").setAttribute('src', "./assets/images/Ellipse_1_1.png");
@@ -279,20 +279,20 @@ function changeMode(node,modeArray)
 
 function getTrainingData(){
 	if (tpArray[0] == 1){
-		return "Kaggle";
+		return "kaggle";
 	}
 	else if (tpArray[1] == 1){
-		return "Keplar";
+		return "kepler";
 	}
 	return "";
 }
 
 function getProcessingData(){
 	if (tpArray[2] == 1){
-		return "TSFresh";
+		return "tsfresh";
 	}
 	else if (tpArray[3] == 1){
-		return "LightKurve";
+		return "lightkurve";
 	}
 	return "";
 }
@@ -303,15 +303,15 @@ function getModeData(){
 	for (let i = 0; i < modeArray.length; i++){
 		if (modeArray[i] == 1){
 			if (i == 0)
-				modeString += "RNN";
+				modeString += "rnn";
 			else if (i == 1)
-				modeString += "LSTM";
+				modeString += "lstm";
 			else if (i == 2)
-				modeString += "GRU";
+				modeString += "gru";
 			else if (i == 3)
-				modeString += "LR";
+				modeString += "lr";
 			else if (i == 4)
-				modeString += "RF";
+				modeString += "rf";
 			modeString += ",";
 		}	
 	}
@@ -319,45 +319,76 @@ function getModeData(){
 	return modeString;
 }
 
+
 function httpRequest(){
 	inputData = document.getElementById("Input-Box-1").value;
 	
-	//replace space with %20
-	inputData = inputData.replace(/ /g, '%20');
-	//console.log(inputData);
-	
-	trainingData = getTrainingData();	
-	processingData = getProcessingData();
-	//console.log("tpArray: " + tpArray);
-
-	modeData = getModeData();
-	//console.log("Models: " + modeData);
-	
-	const Http = new XMLHttpRequest();
-	const url = 'http://127.0.0.1:5000/?input='+inputData+'&training_data='+trainingData+'&processing='+processingData+'&models=['+modeData+']';
-	console.log(url);
-	
-	Http.open("GET", url);
-	Http.send();
+	if(!dropDown.includes(inputData)){
+		inputErrorMessage();
+	}
+	else{
+		//console.log(inputData);
 		
-	testResponseFunc();
+		trainingData = getTrainingData();	
+		processingData = getProcessingData();
+		//console.log("tpArray: " + tpArray);
 
-	/*
-	Http.onreadystatechange=function(){
-		if(this.readyState==4 && this.status == 200){
-			console.log(Http.responseText);
-			// assume it returns the testResponse above
+		modeData = getModeData();
+		//console.log("Models: " + modeData);
+		
+		
+		
+		const Http = new XMLHttpRequest();
+		const url = 'http://35.225.133.86:8001/?input='+inputData+'&training_data='+trainingData+'&processing='+processingData+'&models=['+modeData+']';
+		
+		//const url = 'http://35.193.202.90:8001/?input=3733346&training_data=kaggle&processing=tsfresh&models=[rnn,lstm,gru]'
+		//console.log(url);
+		
+		Http.open("GET", url);
+		Http.send();
+			
+		//testResponseFunc();
+		
+		Http.onreadystatechange=function(){
+			if(this.readyState==4 && this.status == 200){
+				//console.log(Http.responseText);
+				testResponse = JSON.parse(Http.responseText)
+				
+				//console.log(typeof(testResponse.results.RNN.Probability))
+				console.log((testResponse))
+				checker=1;
+				
+				pixelFileImage = testResponse.targetpixelfile.substring(2, testResponse.targetpixelfile.length-3)
+				document.getElementById('Target-Pixel-Files-5').src = "data:image/png;base64," + pixelFileImage;
+				
+				filterDisplay();
+				
+			}
+			else{
+				console.log("fail to connect")
+				
+			}
 		}
 	}
-	*/
-	
+}
+
+function inputErrorMessage(){
+
+	turnResultsOff('RNN');
+	turnResultsOff('LSTM');
+	turnResultsOff('GRU');
+	turnResultsOff('LR');
+	turnResultsOff('RF');
+	document.getElementById('theResults-RNN').style.display = "block";
+	document.getElementById('theResults-RNN').innerHTML = "Please enter a valid input."
+	document.getElementById('Target-Pixel-Files-5').src = "./assets/images/transparent.png";
 }
 
 function filterDisplay()
 {	
-	console.log(tpArray[0]==1||tpArray[1]==1);
-	console.log(tpArray[2]==1 ||tpArray[3]==1);
-	console.log((tpArray[0]==1||tpArray[1]==1) && (tpArray[2]==1 ||tpArray[3]==1));
+	//console.log(tpArray[0]==1||tpArray[1]==1);
+	//console.log(tpArray[2]==1 ||tpArray[3]==1);
+	//console.log((tpArray[0]==1||tpArray[1]==1) && (tpArray[2]==1 ||tpArray[3]==1));
 	if((tpArray[0]==1||tpArray[1]==1) && (tpArray[2]==1 ||tpArray[3]==1))
 	{
 		if(modeArray[0]==0)
@@ -383,17 +414,24 @@ function filterDisplay()
 	}
 }
 
+
 function turnResultsOff(name)
 {
-		document.getElementById('theResults-'+name+'-break').style.display = "none";
-		document.getElementById('theResults-'+name).style.display = "none";
-		document.getElementById('theResults-'+name+'-Probability').style.display = "none";
-		document.getElementById('theResults-'+name+'-Classification').style.display = "none";
+	document.getElementById('theResults-'+name+'-break').style.display = "none";
+	document.getElementById('theResults-'+name).style.display = "none";
+	document.getElementById('theResults-'+name+'-Probability').style.display = "none";
+	document.getElementById('theResults-'+name+'-Classification').style.display = "none";
+}
+
+function roundDecimal(string)
+{
+	num = parseFloat(string); 
+	num = parseInt(Math.round(num * 100)/100 * 100);
+	return num;
 }
 
 function turnResultsOn(name)
 { 
-
 	document.getElementById('theResults-'+name+'-break').style.display = "block";
 	document.getElementById('theResults-'+name).style.display = "block";
 	document.getElementById('theResults-'+name+'-Probability').style.display = "block";
@@ -402,29 +440,29 @@ function turnResultsOn(name)
 	document.getElementById('theResults-'+name).innerHTML= name + ":";
 	if(name=="RNN")
 	{
-		document.getElementById('theResults-'+name+'-Probability').innerHTML = "Probability: " + testResponse.results.RNN.Probability;
-		document.getElementById('theResults-'+name+'-Classification').innerHTML = "Classification: "+ testResponse.results.RNN.classification;
+		document.getElementById('theResults-'+name+'-Probability').innerHTML = "Probability: " + roundDecimal(testResponse.results.RNN.Probability) + "%";
+		document.getElementById('theResults-'+name+'-Classification').innerHTML = "Classification: "+ testResponse.results.RNN.Classification;
 	}
 	if(name=="LSTM")
 	{
-		document.getElementById('theResults-'+name+'-Probability').innerHTML = "Probability: " + testResponse.results.LSTM.Probability;
-		document.getElementById('theResults-'+name+'-Classification').innerHTML = "Classification: "+ testResponse.results.LSTM.classification;
+		document.getElementById('theResults-'+name+'-Probability').innerHTML = "Probability: " + roundDecimal(testResponse.results.LSTM.Probability) + "%";
+		document.getElementById('theResults-'+name+'-Classification').innerHTML = "Classification: "+ testResponse.results.LSTM.Classification;
 	}
 	if(name=="GRU")
 	{
-		document.getElementById('theResults-'+name+'-Probability').innerHTML = "Probability: " + testResponse.results.GRU.Probability
-		document.getElementById('theResults-'+name+'-Classification').innerHTML = "Classification: "+ testResponse.results.GRU.classification;
+		document.getElementById('theResults-'+name+'-Probability').innerHTML = "Probability: " + roundDecimal(testResponse.results.GRU.Probability) + "%";
+		document.getElementById('theResults-'+name+'-Classification').innerHTML = "Classification: "+ testResponse.results.GRU.Classification;
 	}
 	if(name=="LR")
 	{
-		document.getElementById('theResults-'+name+'-Probability').innerHTML = "Probability: " + testResponse.results.LR.Probability
-		document.getElementById('theResults-'+name+'-Classification').innerHTML = "Classification: "+ testResponse.results.LR.classification;
+		document.getElementById('theResults-'+name+'-Probability').innerHTML = "Probability: " + roundDecimal(testResponse.results.LR.Probability) + "%";
+		document.getElementById('theResults-'+name+'-Classification').innerHTML = "Classification: "+ testResponse.results.LR.Classification;
 	}
 
 	if(name=="RF")
 	{
-		document.getElementById('theResults-'+name+'-Probability').innerHTML = "Probability: " + testResponse.results.RF.Probability
-		document.getElementById('theResults-'+name+'-Classification').innerHTML = "Classification: "+ testResponse.results.RF.classification;
+		document.getElementById('theResults-'+name+'-Probability').innerHTML = "Probability: " + roundDecimal(testResponse.results.RF.Probability) + "%";
+		document.getElementById('theResults-'+name+'-Classification').innerHTML = "Classification: "+ testResponse.results.RF.Classification;
 	}
 }
 
@@ -432,7 +470,8 @@ function turnResultsOn(name)
 function pixelImage(){
 	if(checker!=0)
 	{
-		document.getElementById('Target-Pixel-Files-5').src = "data:image/png;base64," + testResponse.targetpixelfile;
+		pixelFileImage = testResponse.targetpixelfile.substring(2, testResponse.targetpixelfile.length-3)
+		document.getElementById('Target-Pixel-Files-5').src = "data:image/png;base64," + pixelFileImage;
 	}
 	else
 		alert("No input detected")
@@ -440,25 +479,17 @@ function pixelImage(){
 
 function lightCurveImage(){
 	if(checker!=0)
-	{
-		document.getElementById('Target-Pixel-Files-5').src = "data:image/png;base64," + testResponse.lightcurve
+	{	
+		console.log("Full LC link: " + testResponse.lightcurve);
+		lcImage = testResponse.lightcurve.substring(2, testResponse.lightcurve.length-3);
+		console.log("Parsed LC Link: " + lcImage);
+		document.getElementById('Target-Pixel-Files-5').src = "data:image/png;base64," + lcImage;
 	}
 	else
 		alert("No input detected")
 }
 
-// testing to see if I am stupid or if the url does not work
-function dummyResponse(){
-	var dummyResponse = {
-		id: 22,
-		url: "https://thatcopy.github.io/catAPI/imgs/jpg/6554b20.jpg",
-		webpurl: "https://thatcopy.github.io/catAPI/imgs/webp/6554b20.webp",
-		x: 63.9,
-		y: 57.52
-	}
-	document.getElementById('Target-Pixel-Files-5').src = dummyResponse.url;	
-}
-
+/*
 function testResponseFunc(){
 	// test responses
 	
@@ -479,10 +510,10 @@ function testResponseFunc(){
 		"targetpixelfile" : pixelFile,
 		"lightcurve" : LC,
 		"results" : {
-			"RNN" : {"Probability":50, "classification": "Yes"},
-			"LSTM" : {"Probability":69, "classification": "Yes"},
-			"GRU" : {"Probability":70, "classification": "Yes"},
-		"LR" : {"Probability":70, "classification": "Yes"},
+			"RNN" : {"Probability":50, "Classification": "Yes"},
+			"LSTM" : {"Probability":69, "Classification": "Yes"},
+			"GRU" : {"Probability":70, "Classification": "Yes"},
+		"LR" : {"Probability":70, "Classification": "Yes"},
 		"RF" : {}
 		}
     }
@@ -494,3 +525,4 @@ function testResponseFunc(){
 
 	filterDisplay();
 }
+*/
